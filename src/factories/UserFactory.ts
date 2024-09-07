@@ -1,5 +1,5 @@
 import { User } from "../models/User";
-import bcrypt from "bcrypt";
+import bcrypt from "react-native-bcrypt";
 
 export class UserFactory {
   static async createUser(email: string, password: string): Promise<User> {
@@ -9,7 +9,7 @@ export class UserFactory {
         alert("Email is invalid");
         throw new Error("Email is invalid");
       }
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hashSync(password, 10);
       return new User(email, hashedPassword);
     } catch (error) {
       console.error("Error creating user:", error);
